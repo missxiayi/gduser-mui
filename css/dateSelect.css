@@ -1,0 +1,295 @@
+ul,li
+{	
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.clear
+{
+	clear:both;
+	height:0;
+}
+
+.tz-datepicker
+{
+	width:305px;
+	border:solid 1px #4FA6ED;	
+	border-radius: 5px;
+	font-size:14px;
+	position:absolute;
+	z-index:999;
+	display:none;
+	background: #fff;
+}
+.tz-datepicker .year-month
+{
+	height:50px;
+	text-align:center;
+	cursor:pointer;
+	margin-top:1px;
+	font-size: 16px;
+	line-height: 50px;
+}
+.tz-datepicker .year-month span
+{
+	display:inline-block;	
+	height:30px;
+	line-height:25px;
+	
+}
+.tz-datepicker .year-month span:hover
+{
+	color:#fff;
+	background:#4FA6ED;
+}
+.tz-datepicker .year-month span.active
+{
+	color:#fff;
+	background: #4FA6ED;
+}
+
+.datesel .span-arrow
+{
+	width:14px;
+	height:14px;	
+	display:block;
+	position:absolute;
+	right:10px;
+	top:8px;
+}
+.datesel .span-col
+{
+	background:url(../../image/content/select-dropdown-arrow.png) no-repeat left top;
+}
+.datesel .span-ex
+{
+	background:url(../../image/content/select-dropdown-arrow.png) no-repeat left top -14px;
+}
+
+
+.year-month .left ,.right
+{
+	width: 30px;
+	margin-left:2px;
+	font-size: 23px;
+	color: #4FA6ED;
+}
+.year-month .month
+{
+	width:74px;
+	margin-left:1px;
+	position:relative;
+}
+.year-month .month span
+{
+	width:74px;
+	position:relative;
+}
+.year-month .year
+{
+	width:74px;
+	margin-right:1px;
+	position:relative;	
+}
+.year-month .year span
+{
+	width:74px;
+	text-align:center;
+	line-height: 18px!important;
+}
+
+
+
+.year-month .month span , .year-month .year span
+{
+	background:url(image/up-default.png) no-repeat center right 6px;
+}
+
+.year-month .month span:hover , .year-month .year span:hover
+{
+	background:url(image/up-active.png) #4FA6ED no-repeat center right 6px;
+}
+
+.year-month .month span.active , .year-month .year span.active
+{
+	background:url(image/up-active.png) #4FA6ED no-repeat center right 6px;
+}
+
+
+
+/* 閺勭喐婀� */
+.week
+{
+	height:25px;
+	color:#4FA6ED;
+}
+.week ul
+{
+	padding:0;
+	margin:0;
+}
+.week ul li
+{
+	width:43px;
+	line-height:25px;
+	float:left;
+	text-align:center;
+}
+
+
+
+/* 婢讹拷 */
+.day
+{
+	background:#f3f3f3;
+}
+.day ul
+{
+	overflow:hidden;
+}
+.day ul li
+{
+	height:40px;
+	line-height:40px;
+	width:43px;
+	float:left;
+	text-align:center;
+	background:#fff;
+	margin-top:1px;
+	cursor:pointer;
+}
+.day ul li:hover
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+.day ul li.active
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+
+
+/* 閺堬拷 */
+.year-month .month .month-list
+{
+	width:72px;
+	border:solid 1px #ccc;
+	border-top:none;
+	position:absolute;
+	top:25px;
+	left:0;
+	background:#fefefe;
+	display:none;
+	color:#4FA6ED;
+}
+.month-list ul li
+{
+	width:34px;
+	float:left;
+	height:20px;
+	cursor:pointer;
+	text-align:center;
+	line-height:20px;
+	margin:1px;
+}
+.month-list ul li:hover
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+
+.month-list ul li.active
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+
+
+
+/* 闁瀚ㄩ獮锟� */
+.year-month .year .year-list
+{
+	width:72px;
+	border:solid 1px #ccc;
+	border-top:none;
+	position:absolute;
+	top:25px;
+	left:0;
+	background:#fefefe;
+	display:none;
+	color:#4FA6ED;
+}
+.year-list ul
+{
+	overflow:hidden;
+}
+.year-list ul li
+{
+	width:72px;
+	height:20px;
+	cursor:pointer;
+	text-align:center;
+	line-height:20px;
+	margin:1px;
+}
+.year-list ul li:hover
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+
+.year-list ul li.active
+{
+	background:#4FA6ED;
+	color:#fff;
+}
+
+.year-list .year-change
+{
+	margin-top:3px;
+	margin-bottom:3px;
+	overflow: hidden;
+    height: 18px;
+    width: 100%;
+}
+.year-change span
+{
+	width:30px !important;
+	height:18px !important;
+}
+.year-change .year-left
+{	
+	margin-left:4px;
+	margin-right:4px;
+	background:url(image/left-default.png) #fff no-repeat center !important;
+}
+.year-change .year-left:hover
+{	
+	background:url(image/left-active.png) #3a98d8 no-repeat center !important;
+}
+.year-change .year-right
+{	
+	background:url(image/right-default.png) #fff no-repeat center !important;
+}
+.year-change .year-right:hover
+{	
+	background:url(image/right-active.png) #3a98d8 no-repeat center !important;
+}
+
+.tz-datepicker .action
+{
+	height:40px;
+	border-top: solid 1px #f3f3f3;
+}
+.tz-datepicker .action span
+{
+	line-height:40px;
+	width:70px;
+	color:#4FA6ED;
+	text-align:center;
+	cursor:pointer;
+	display:inline-block;	
+}
+
+

@@ -1,0 +1,1280 @@
+﻿/********************公共样式*******************/
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+}
+
+body, .mui-content {
+    background: #ffffff;
+    font-family: "微软雅黑";
+    width: 100%;
+    height: 100%;
+    color: #666666;
+    font-size: 1.4rem;
+}
+
+.mui-bar-nav ~ .mui-content {
+    padding-top: 6rem;
+    height: 95%;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+@media only screen and (min-width:300px) {
+    /*iphone5*/
+    html {
+        font-size: 50% !important;
+    }
+}
+
+@media only screen and (min-width:331px) {
+    /*iphone5*/
+    html {
+        font-size: 56.25% !important;
+    }
+}
+
+@media only screen and (min-width:361px) {
+    /*note*/
+    html {
+        font-size: 62.5% !important;
+    }
+}
+
+@media only screen and (min-width:376px) {
+    /*iphone6*/
+    html {
+        font-size: 70.31% !important;
+    }
+}
+
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94% !important;
+    }
+}
+
+@media only screen and (min-width:561px) {
+    html {
+        font-size: 109% !important;
+    }
+}
+
+@media only screen and (min-width:641px) {
+    html {
+        font-size: 125% !important;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a :hover {
+        color: #000000;
+    }
+
+input, button, textarea {
+    outline: none;
+    -webkit-appearance: none;
+    /*去除系统默认的样式*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* 点击高亮的颜色*/
+}
+
+#pullrefresh {
+    background: #ffffff;
+}
+
+.outer {
+    position: absolute;
+    left: 0;
+    top:4rem;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.header {
+    position: relative;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    border-bottom: 1px solid #ccc;
+    background-color: #127ac8;
+}
+
+    .header h1 {
+        text-align: center;
+        font-weight: normal;
+        color: #fff;
+    }
+
+    .header .btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4em;
+        height: 100%;
+        text-align: center;
+        color: #06c;
+        background-color: #127ac8;
+    }
+
+        .header .btn:active {
+            background-color: #aaa;
+            color: #fff;
+        }
+
+.inner {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background-color: #fff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin: 3.125%;
+    text-decoration: none;
+    padding: 1rem;
+    background: #F1F1F1;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+}
+
+.opacity {
+    -webkit-animation: opacity 0.3s linear;
+    animation: opacity 0.3s linear;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.dropload-refresh {
+    line-height: 20px !important;
+}
+
+
+/*新增历史界面图表切换的相关样式*/
+.mui-segmented-control {
+    border: 1px solid #4FA6ED;
+}
+
+    .mui-segmented-control .mui-control-item {
+        color: #4FA6ED;
+        border-color: #4FA6ED;
+        border-left: 1px solid #4FA6ED;
+    }
+
+        .mui-segmented-control .mui-control-item.mui-active {
+            background-color: #4FA6ED;
+        }
+
+.index-content {
+    width: 100%;
+    background-color: white;
+    height: 35rem;
+    margin-top: 5rem;
+}
+
+.index-chart {
+    padding: 0 .1rem;
+    height: 35rem;
+    width: 100%;
+    background: white !important;
+    overflow: hidden;
+    margin: .5rem 0;
+}
+
+/********************公共样式结束*******************/
+
+
+/**********每日耗热页面样式--开始--***********/
+
+.item .hot_icon {
+    background: url(../images/hot_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1rem;
+    height: 1.5rem;
+    display: inline-block;
+    margin-top: -0.2rem;
+}
+
+.item .hot_num {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    line-height: 1.5rem;
+    margin: 0 0.5rem;
+    color: #4FA6ED;
+}
+
+.item .hot_date {
+    color: #666666;
+}
+
+
+/*********每日耗热页面样式--结束--**********/
+
+
+/*********历史记录页面样式--开始*********/
+
+.time_check {
+    width: 100%;
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.keyword_date {
+    width: 12.5rem;
+    height: 2.5rem;
+    border: 1px solid #4FA6ED;
+    background: #4FA6ED;
+    border-radius: 100px;
+    text-align: center;
+    color: #FFFFFF;
+    letter-spacing: 0.69px;
+    /*元素间字母间距*/
+}
+
+.line_row {
+    margin: 3.125%;
+    text-decoration: none;
+    background: #F1F1F1;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+    height: 8.9rem;
+}
+
+.line_time {
+    color: #666666;
+    padding: 1rem 1.3rem;
+    font-size: 1.4rem;
+}
+
+.line_col_one {
+    float: left;
+    width: 20%;
+}
+
+.line_col_two {
+    float: left;
+    width: 30%;
+}
+
+    .line_col_one p, .line_col_two p {
+        margin: 0 !important;
+    }
+
+.line_text {
+    font-size: 1.2rem;
+    color: #666666;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+.line_num {
+    color: #4FA6ED;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.line_img {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+
+/***********历史记录页面样式--结束***********/
+
+
+/***********室温记录页面样式--开始***********/
+
+.temp_icon {
+    background: url(../images/temp_icon.png) center no-repeat;
+    width: 1rem;
+    height: 2rem;
+    background-size: 100%;
+    display: inline-block;
+}
+
+
+/***********室温记录页面样式--结束***********/
+
+
+/***********故障列表页面样式--开始***********/
+
+.help_p {
+    font-size: 1.4rem;
+    color: #4FA6ED;
+    margin: 0 !important;
+}
+
+.repair_icon {
+    background: url(../images/help_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.help_title {
+    border-bottom: 1px solid #BCBCBC;
+    margin: 1.6% auto;
+    width: 90%;
+    text-align: left;
+    height: 3.2rem;
+}
+
+.help_title2 {
+    margin: 1.6% auto;
+    width: 90%;
+    text-align: left;
+    height: auto;
+}
+
+.help_title_more {
+    color: #666666;
+    margin: 1.6% auto;
+    width: 90%;
+    text-align: right;
+    height: 2rem;
+    font-size: 1.1rem;
+}
+
+.help_textarea {
+    font-size: 1.3rem;
+    color: #666666;
+    line-height: 2rem;
+}
+
+.help_date {
+    font-size: 1rem;
+    float: right;
+    color: #666666;
+    margin: 0 !important;
+}
+
+
+/***********故障列表页面样式--结束***********/
+
+
+/***********故障详情页面样式--开始***********/
+
+.repair_tell_icon {
+    background: url(../images/tell_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.repair_que {
+    color: #666666;
+}
+
+.detail_date {
+    font-size: 1rem;
+    color: #666666;
+    width: 100%;
+    text-align: right;
+    display: block;
+}
+
+.z_addImg_detail {
+    height: auto;
+    width: 96%;
+    padding: 2%;
+    margin: 1.5rem 0;
+}
+
+    .z_addImg_detail p {
+        width: 19%;
+        float: left;
+        margin: 0.1rem;
+    }
+
+.row img {
+    width: 100%;
+}
+
+
+/***********故障详情页面样式--结束***********/
+
+
+/***********申请客服页面样式--开始***********/
+
+.help_container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    clear: both;
+    margin-top:3rem
+}
+
+.help_select_div {
+    position: relative;
+}
+
+.help_input {
+    display: block;
+    width: 100%;
+    height: 4rem;
+    margin: 1.5rem 0;
+    color: #666666;
+    background: #F1F1F1;
+    border-top: 1px solid #BCBCBC;
+    border-bottom: 1px solid #BCBCBC;
+    border-left: none;
+    border-right: none;
+    font-size: 1.4rem;
+    padding-left: 2%;
+}
+
+.select_img {
+    position: absolute;
+    left: 100%;
+    margin-left: -3.8rem;
+    top: 1px;
+    line-height: 4rem;
+}
+
+    .select_img img {
+        width: 1.5rem;
+    }
+
+.select_img1 {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+}
+
+.jt_xz {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+
+.help_select_list {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background: #ffffff;
+    top: 8.5rem;
+}
+
+    .help_select_list li {
+        background: #FFFFFF;
+        border-bottom: 1px solid #BCBCBC;
+        height: 4rem;
+        line-height: 4rem;
+        padding-left: 0.8rem;
+        color: #666666;
+    }
+
+
+
+.apply_text {
+    width: 100%;
+    height: 12.5rem;
+    padding: 2%;
+    overflow: auto;
+    clear: both;
+    display: block;
+    background: #F1F1F1;
+    border-top: 1px solid #BCBCBC;
+    border-bottom: 1px solid #BCBCBC;
+    border-left: none;
+    border-right: none;
+    line-height: 2rem;
+}
+
+
+/*图片上传*/
+
+.z_photo {
+    width: 100%;
+    height: auto;
+    padding: 1%;
+    overflow: auto;
+    clear: both;
+    display: block;
+    background: #F1F1F1;
+    border-top: 1px solid #BCBCBC;
+    border-bottom: 1px solid #BCBCBC;
+    border-left: none;
+    border-right: none;
+    margin: 1.5rem 0;
+}
+
+
+/*遮罩层*/
+
+.apply_btn_div {
+    text-align: center;
+    width: 100%;
+    margin-top: 10rem;
+}
+
+    .apply_btn_div .apply_btn {
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        width: 95%;
+        height: 5rem;
+        border-radius: 40px;
+        background: #1E7ECC;
+        border: 1px solid #BCBCBC;
+    }
+
+
+/***********申请客服页面样式--结束***********/
+
+
+/***********公共信息页面样式--开始***********/
+
+.notice_item {
+    margin: 1rem auto;
+    text-decoration: none;
+    background: #F1F1F1;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+    height: auto;
+    width: 92%;
+}
+
+.notice_title {
+    border-bottom: 1px solid #BCBCBC;
+    margin: 1.6% auto;
+    width: 90%;
+    text-align: left;
+}
+
+.notice_p {
+    color: #4FA6ED;
+    line-height: 2rem;
+    padding-bottom: 1.6%;
+}
+
+.notice_textarea {
+    color: #666666;
+    font-size: 1.3rem;
+}
+
+.notice_date {
+    font-size: 1rem;
+    float: right;
+    color: #666666;
+}
+
+.notice_more {
+    float: right;
+    color: #000000;
+}
+
+.notice_icon {
+    background: url(../images/notice_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.notice_user_icon {
+    background: url(../images/message_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/***********公共信息页面样式--结束***********/
+
+
+/***********缴费记录页面样式--开始***********/
+
+.pay_row {
+    margin: 3.125%;
+    text-decoration: none;
+    background: #F1F1F1;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+    color: #666666;
+}
+
+.pay_title_time {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid #BCBCBC;
+}
+
+.pay_date {
+    text-align: left;
+}
+
+.pay_state {
+    float: right;
+}
+
+.pay_title_mesg {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+.pay_title {
+    float: left;
+    width: 65%;
+    line-height: 2rem;
+}
+
+    .pay_title p {
+        margin: 0 !important;
+    }
+
+.pay_num {
+    text-align: center;
+    font-size: 2rem;
+    line-height: 4rem;
+    color: #4FA6ED;
+    float: left;
+    width: 35%;
+}
+
+
+/*支付中--样式*/
+
+.paying_text {
+    color: #F6A623;
+}
+
+.paying_icon {
+    background: url(../images/paying_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.4rem;
+    height: 1.4rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/*支付完成--样式*/
+
+.payed_text {
+    color: #16CC45;
+}
+
+.payed_icon {
+    background: url(../images/true_icon.png) center no-repeat;
+    background-size: 100%;
+    width: 1.4rem;
+    height: 1.4rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/***********缴费记录页面样式--结束***********/
+
+
+/***********mui下拉刷新上拉加载样式***********/
+.mui-bar ~ .mui-content .mui-fullscreen {
+    top: 4rem;
+    height: auto;
+}
+
+.mui-pull-top-tips {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    z-index: 999;
+}
+
+.mui-bar ~ .mui-pull-top-tips {
+    top: 24px;
+}
+
+.mui-pull-top-wrapper {
+    width: 42px;
+    height: 42px;
+    display: block;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background-clip: padding-box;
+    box-shadow: 0 4px 10px #bbb;
+    overflow: hidden;
+}
+
+.mui-pull-top-tips.mui-transitioning {
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+}
+
+.mui-pull-top-tips .mui-pull-loading {
+    /*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+    margin: 0;
+}
+
+.mui-pull-top-wrapper .mui-icon,
+.mui-pull-top-wrapper .mui-spinner {
+    margin-top: 7px;
+}
+
+.mui-pull-bottom-tips {
+    text-align: center;
+    background-color: #ffffff;
+    font-size: 15px;
+    line-height: 40px;
+    color: #777;
+}
+
+.mui-pull-top-canvas {
+    overflow: hidden;
+    background-color: #fafafa;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px #bbb;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+    .mui-pull-top-canvas canvas {
+        width: 40px;
+    }
+
+.mui-slider-indicator.mui-segmented-control {
+    background-color: #efeff4;
+}
+
+.mui-control-content {
+    width: 100%;
+    height: 100%;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    border-bottom: 0;
+}
+
+/******************登录页面样式开始********************/
+
+.login_img {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    font-size: 0;
+    margin: 0 auto;
+    padding: 9rem 0 2rem 0;
+}
+
+    .login_img img {
+        width: 100%;
+    }
+
+.login_title {
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    padding-bottom: 4rem;
+    font-weight: bold;
+}
+
+.mui-input-group {
+    background-color: transparent !important;
+}
+
+    .mui-input-group:before {
+        background-color: transparent !important;
+    }
+
+    .mui-input-group:after {
+        background-color: transparent !important;
+    }
+
+    .mui-input-group label {
+        width: 15%;
+    }
+
+label img {
+    width: 1.6rem;
+    height: 1.6rem;
+    float: left;
+    margin: 0 0 0 0.5rem;
+}
+
+.checkbox {
+    color: #cccccc;
+    font-size: 1.2rem;
+    margin: 1.5rem 2rem;
+    height: 1.5rem;
+}
+
+.rem_pwd {
+    float: left;
+    margin-top: -0.25rem;
+}
+
+.login_forget_pwd {
+    float: right;
+    color: #ffffff;
+    margin-top: -0.25rem;
+}
+
+.mui-content-padded {
+    margin: 2rem;
+    padding-top: 5rem;
+}
+
+.login_btn {
+    background-color: #4486C9;
+    border: 1px solid #4486C9;
+    border-radius: 25px;
+    padding: 10px 0;
+    height: 4.5rem;
+}
+
+    .login_btn:enabled:active {
+        background-color: #3F7EC4 !important;
+        border: 1px solid #3F7EC4;
+    }
+
+.login_footer {
+    height: 7%;
+    clear: both;
+}
+
+    .login_footer p {
+        font-size: 1.1rem;
+        color: #105891;
+        text-align: center;
+        margin: 0;
+    }
+
+
+/******************登录页面样式结束********************/
+
+
+/******************设置页面样式开始********************/
+
+.mui-bar {
+    background: #4486C9 !important;
+    height: 4rem !important;
+}
+
+.setup_return {
+    width: 2.3rem;
+    padding: .7rem 0 0 1rem;
+}
+
+.mui-title {
+    color: #FFFFFF !important;
+    font-size: 1.5rem !important;
+    line-height: 4rem !important;
+}
+
+.mui-table-view {
+    margin-bottom: 1rem;
+}
+
+    .mui-table-view-chevron:before,
+    .mui-table-view-chevron:after {
+        background: #88888a;
+    }
+
+    .mui-table-view a {
+        color: #000000 !important;
+    }
+
+.mui-table-view-cell > a:not(.mui-btn) {
+    margin: -5px -15px;
+}
+
+.mui-navigate-right:after,
+.mui-push-right:after {
+    font-size: 2rem;
+}
+
+.mui-table-view-cell:after {
+    background: #88888a;
+    right: 15px;
+}
+
+
+/******************设置页面样式结束********************/
+
+
+/******************修改密码，重置密码样式开始*******************/
+
+.change_pwd_box {
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.change_pwd_box:before, .change_pwd_box:after{
+    background: #88888a;
+}
+
+.pwd_left {
+    float: left;
+    width: 28%;
+    display: inline-block;
+}
+
+    .pwd_left img {
+        width: 1.6rem;
+        vertical-align: middle;
+        margin-right: .5rem;
+    }
+
+.mui-input-password {
+    border: none !important;
+}
+
+.mui-password {
+    width: 72%;
+    display: inline-block;
+}
+
+.mui-icon-eye {
+    top: 1.3rem !important;
+}
+
+.setpwd_btn {
+    line-height: 3.3rem!important;
+    color: #67A2FF!important;
+    border: none!important;
+}
+
+/******************修改密码，重置密码样式结束*******************/
+
+
+/******************index主界面样式开始********************/
+
+
+/*banner*/
+
+.banner_row {
+    margin-bottom: 2rem;
+}
+
+.banner_title_bg {
+    height: 4.8rem;
+}
+
+.banner_title {
+    font-size: 1.3rem;
+    color: #ffffff;
+    text-align: center;
+    padding: 1.3rem 1rem;
+}
+
+.banner_title_text {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.banner_img_select {
+    width: .4rem;
+}
+
+.banner_bg {
+    background: url(../images/icon_index.png) no-repeat;
+    height: 17.7rem;
+    background-size: 100% 100%;
+    padding: 0 0 2.0rem 0;
+    text-align: center;
+}
+
+.banner_inform_box {
+    width: 100%;
+    height: 3.0rem;
+}
+
+.banner_inform {
+    width: 100%;
+    height: 3.0rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.banner_inform_text {
+    font-size: 1.2rem;
+    color: #fef8c4;
+    float: left;
+    line-height: 2.8rem;
+    margin-left: 1rem;
+}
+
+.close {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.banner_text {
+    border: none;
+}
+
+.banner_tmp {
+    font-size: 5.0rem;
+    color: #ffffff;
+}
+
+.banner_text {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.banner_unit {
+    font-size: 2.4rem;
+}
+
+
+/*中间三块*/
+
+.index_line_row {
+    margin-bottom: 1rem;
+    height: 6rem;
+}
+
+.index_line_col {
+    border-right: 1px solid #4486C9;
+    height: 4.0rem;
+    float: left;
+    width: 33%;
+}
+
+.line_col_last {
+    height: 4.0rem;
+    float: left;
+    width: 33%;
+}
+
+.index_line_text {
+    font-size: 1.4rem;
+    color: #666666;
+    text-align: center;
+}
+
+.index_line_num {
+    font-size: 1.3rem;
+    color: #333333;
+    text-align: center;
+}
+
+.index_line_img {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+
+/*列表组*/
+
+.list_row {
+    padding: 0 1.5rem;
+}
+
+    .list_row p {
+        margin-bottom: 0 !important;
+    }
+
+.list_row1 {
+    background-color: #eeeeee;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+    height: 4.5rem;
+    margin-bottom: 1rem;
+}
+
+.list_text {
+    font-size: 1.4rem;
+    color: #666666;
+    float: left;
+    margin-left: 1rem;
+    line-height: 4.3rem;
+}
+
+.list_num {
+    font-size: 1.4rem;
+    color: #4486C9;
+    float: right;
+    margin-right: 1rem;
+    line-height: 4.3rem;
+}
+
+.list_line {
+    padding: 0;
+}
+
+.list_hr {
+    height: 1px;
+    border: none;
+    border-top: 1px solid #dcdcdc;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+
+/*弹出框样式*/
+
+
+.tem_box_bg {
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.3);
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.tem_box {
+    position: fixed;
+    display: none;
+    top: 30%;
+    left: 10%;
+    z-index: 3;
+    background-color: #fff;
+    width: 80%;
+    height: 35%;
+    border-radius: 10px;
+}
+
+
+
+
+.index_header_box {
+    margin: 2rem;
+    color: #999999;
+    font-size: 1.9rem;
+}
+
+.index_row {
+    width: 100%;
+    height: 40%;
+    padding: 1rem 0;
+}
+
+.index_btn {
+    text-align: center;
+    float: left;
+    width: 30%;
+    /*margin:1rem 0*/
+}
+
+.index_btn_num {
+    color: #5497de !important;
+    font-size: 3.5rem !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+.index_border {
+    text-align: center;
+    float: left;
+    width: 40%;
+}
+
+.index_num {
+    color: #333333;
+    font-size: 4rem;
+    text-align: center;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    width: 8rem;
+}
+
+.index_unit {
+    color: #666666;
+    font-size: 2rem;
+}
+
+.index_footer button {
+    height: 6.5rem;
+    width: 50%;
+    float: left;
+    border: none;
+    margin-bottom: -0.5rem;
+    color: #ffffff;
+    font-size: 1.8rem;
+}
+
+.index_btn_confirm {
+    background: #4486C9;
+}
+
+.index_btn_cancel {
+    background: #E0E0E0;
+}
+
+.index_btn_confirm:hover {
+    background: #127AC8;
+}
+
+.index_btn_cancel:hover {
+    background: #cacaca;
+}
+
+
+/******************index主界面样式结束*******************/

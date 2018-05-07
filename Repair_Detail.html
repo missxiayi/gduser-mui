@@ -1,0 +1,69 @@
+<html lang="zh-cn">
+
+	<head>
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+		<link rel="stylesheet" href="css/zoomify.min.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/zoomify.min.js"></script>
+		<style>
+			.row img {
+				width: 100% !important;
+				height: 5rem;
+			}
+		</style>
+		<script type="text/javascript">
+			//点击图片放大
+			$("img").click(function() {
+				//$('.row .p_bg_img').zoomify();
+				$('.row img').zoomify();
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="outer">
+			<div class="inner">
+				<div class="lists">
+					<div class="notice_item">
+						<div class="notice_title">
+							<p class="notice_p">
+								<i class="repair_icon"></i>
+								<span class="repair_que">怎么设置室温？家里的温度太低怎么设置室温？家里的温度太低怎么设置室温？家里的温度太低</span>
+							</p>
+							<span class="detail_date"> 2017-01-03&nbsp;12:00:00</span>
+							<div class="row">
+								<div class="col-xs-4 col-md-4">
+									<p class="p_bg_img"></p>
+									<p><img src="images/ceshi.jpg" /></p>
+								</div>
+								<div class="col-xs-4 col-md-4">
+									<p><img src="images/1.png" /></p>
+								</div>
+								<div class="col-xs-4 col-md-4">
+									<p><img src="images/2.JPG" /></p>
+								</div>
+								<div class="col-xs-4 col-md-4">
+									<p><img src="images/ceshi.jpg" /></p>
+								</div>
+								<div class="col-xs-4 col-md-4">
+									<p><img src="images/ceshi.jpg" /></p>
+								</div>
+								
+							</div>
+						</div>
+						<div class="notice_title" style="border: none;">
+							<p class="notice_p">
+								<i class="repair_tell_icon"></i>
+								<span class="notice_textarea">点击室温控制器面板上的温度,点击室温控制器面板上的温度，点击室温控制器面板上的温度，点击室温控制器面板上的温度。</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

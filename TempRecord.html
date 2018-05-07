@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-cn">
+
+	<head>
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/dropload.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="outer">
+			<!--  <div class="header">
+                    <span style="float:left;font-size:2rem"><</span>
+                    <h1>每日耗热</h1>
+            </div>-->
+			<div class="inner">
+				<div class="lists">
+					<div class="item opacity">
+						<i class="temp_icon"></i>
+						<span class="hot_num">21.5℃</span>
+						<span class="hot_date">2017-04-05&nbsp;12:00:00</span>
+					</div>
+				</div>
+			</div>
+			<!-- jQuery1.7以上 或者 Zepto 二选一，不要同时都引用 -->
+			<script src="js/zepto.min.js"></script>
+			<script src="js/dropload.min.js"></script>
+			<script>
+				var count = 0;
+				var pageSize = 10;
+				var pageIndex = 0;
+				var resultCount = 0;
+				$(function() {
+					// dropload
+					var dropload = $('.inner').dropload({
+						domUp: {
+							domClass: 'dropload-up',
+							domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+							domUpdate: '<div class="dropload-update">↑释放更新</div>',
+							domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+						},
+						domDown: {
+							domClass: 'dropload-down',
+							domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+							domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+							domNoData: '<div class="dropload-noData">暂无数据</div>'
+						},
+						loadUpFn: function(me) {
+							pageIndex = 1;
+							$.ajax({
+								type: 'GET',
+								url: 'json/temp.json',
+								dataType: 'json',
+								success: function(data) {
+									count = data.count;
+									var result = '';
+									for(var i = 0; i < data.lists.length; i++) {
+										result += '<div class="item opacity">' +
+											'<i class="temp_icon">' + '</i>' +
+											'<span class="hot_num">' + data.lists[i].title + '℃' + '</span>' +
+											'<span class="hot_date">' + data.lists[i].date + '</span>' +
+											'</div>';
+									}
+									// 每次数据加载完，必须重置
+									$('.lists').html(result);
+									if(pageIndex * pageSize < count) {
+										me.isLockDown = false;
+										//me.refresh();
+										me.resetload();
+									} else {
+										// 再往下已经没有数据                      
+										// 显示无数据                      
+										me.noData();
+										me.isLockDown = true;
+										me.resetload();
+									}
+								},
+								error: function(xhr, type) {
+									alert('加载出错，请重试!');
+									// 即使加载出错，也得重置
+									dropload.resetload();
+								}
+							});
+						},
+						loadDownFn: function(me) {
+							pageIndex++;
+							$.ajax({
+								type: 'GET',
+								url: 'json/temp.json',
+								dataType: 'json',
+								success: function(data) {
+									count = data.count;
+									var result = '';
+									for(var i = 0; i < data.lists.length; i++) {
+										resultCount++;
+										result += '<div class="item opacity">' +
+											'<i class="temp_icon">' + '</i>' +
+											'<span class="hot_num">' + data.lists[i].title + '℃' + '</span>' +
+											'<span class="hot_date">' + data.lists[i].date + '</span>' +
+											'</div>';
+
+									}
+									$('.lists').append(result);
+									if(pageIndex * pageSize < count) {
+										me.resetload();
+									} else {
+										// 再往下已经没有数据                      
+										// 显示无数据                      
+										me.noData();
+										me.isLockDown = true;
+										me.resetload();
+									}
+								},
+								error: function(xhr, type) {
+									alert('加载出错，请重试!');
+									// 即使加载出错，也得重置
+									me.resetload();
+								}
+							});
+						}
+					});
+				});
+			</script>
+	</body>
+
+</html>

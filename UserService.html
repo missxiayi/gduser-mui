@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-cn">
+
+	<head>
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/dropload.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<div class="outer">
+			<div class="inner">
+				<div class="lists">
+					<a href="Repair_Detail.html">
+						<ul class="notice_item">
+							<li class="help_title">
+								<p class="help_p">
+									志诚华府1号楼1单元0101房间
+								</p>
+								<p class="help_date"> 2017-01-03&nbsp;12:00:00</p>
+							</li>
+							<li class="help_title2">
+								<p class="help_p">
+									<i class="repair_icon"></i>
+									<span class="help_textarea">家里的温度低，不能调节温度,家里的温度低，不能调节温度,家里的温度低，不能调节温度,家里的温度低，不能调节温度啊啊啊啊啊...</span>
+								</p>
+							</li>
+							<li class="help_title_more">
+								已处理
+							</li>
+						</ul>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery1.7以上 或者 Zepto 二选一，不要同时都引用 -->
+		<script src="js/zepto.min.js"></script>
+		<script src="js/dropload.min.js"></script>
+		<script type="text/javascript">
+			var count = 0;
+			var pageSize = 10;
+			var pageIndex = 0;
+			var resultCount = 0;
+			$(function() {
+				// dropload
+				var dropload = $('.inner').dropload({
+					domUp: {
+						domClass: 'dropload-up',
+						domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+						domUpdate: '<div class="dropload-update">↑释放更新</div>',
+						domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+					},
+					domDown: {
+						domClass: 'dropload-down',
+						domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+						domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+						domNoData: '<div class="dropload-noData">暂无数据</div>'
+					},
+					loadUpFn: function(me) {
+						pageIndex = 1;
+						$('.lists').html("");
+						$.ajax({
+							type: 'GET',
+							url: "url",
+							dataType: 'json',
+							success: function(data) {
+								count = data.count;
+								var result = '';
+								for(var i = 0; i < data.lists.length; i++) {
+									result += '<ul class="temp_item">' +
+										'<li class="help_title">' + '<p class="help_p">' + '志诚华府1号楼1单元0101房间' + '</p>' +
+										'<p class="help_date">' + '2017-01-03&nbsp;12:00:00' + '</p>' +
+										'</li>' +
+										'<li class="help_title">' + '<p class="help_p">' + '<i class="repair_icon">' + '</i>' +
+										'<a href="Repair_Detail.aspx">' + '<span class="help_textarea">' + '家里的温度低，不能调节温度啊啊啊啊啊...' + '</span>' +
+										'</a>' + '</p>' + '</li>' + '' + '' + '' +
+										+'<li class="help_title_more">' + '<span class="help_more">' + '已处理' + '</span>' + '</li>' +
+										'</ul>';
+								}
+								// 每次数据加载完，必须重置
+								$('.lists').html(result);
+								if(pageIndex * pageSize < count) {
+									me.isLockDown = false;
+									//me.refresh();
+									me.resetload();
+								} else {
+									// 再往下已经没有数据                      
+									// 显示无数据                      
+									me.noData();
+									me.isLockDown = true;
+									me.resetload();
+								}
+
+							},
+							error: function(xhr, type) {
+								alert('加载出错，请重试!');
+								// 即使加载出错，也得重置
+								dropload.resetload();
+							}
+						});
+					},
+					loadDownFn: function(me) {
+						pageIndex++;
+						$.ajax({
+							type: 'GET',
+							url: "url",
+							dataType: 'json',
+							success: function(data) {
+								count = data.count;
+								var result = '';
+								for(var i = 0; i < data.lists.length; i++) {
+									resultCount++;
+									result += '<ul class="temp_item">' +
+										'<li class="help_title">' + '<p class="help_p">' + '志诚华府1号楼1单元0101房间' + '</p>' +
+										'<p class="help_date">' + '2017-01-03&nbsp;12:00:00' + '</p>' +
+										'</li>' +
+										'<li class="help_title">' + '<p class="help_p">' + '<i class="repair_icon">' + '</i>' +
+										'<a href="Repair_Detail.aspx">' + '<span class="help_textarea">' + '家里的温度低，不能调节温度啊啊啊啊啊...' + '</span>' +
+										'</a>' + '</p>' + '</li>' + '' + '' + '' +
+										+'<li class="help_title_more">' + '<span class="help_more">' + '已处理' + '</span>' + '</li>' +
+										'</ul>';
+								}
+								$('.lists').append(result);
+								if(pageIndex * pageSize < count) {
+									me.resetload();
+								} else {
+									// 再往下已经没有数据                      
+									// 显示无数据                      
+									me.noData();
+									me.isLockDown = true;
+									me.resetload();
+								}
+							},
+							error: function(xhr, type) {
+								alert('加载出错，请重试!');
+								// 即使加载出错，也得重置
+								//me.resetload();
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-cn">
+
+	<head>
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/dropload.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="outer">
+			<div class="inner">
+				<div class="lists">
+					<div class="pay_row">
+						<div class="pay_title_time">
+							<span class="pay_date"> 2017-01-03&nbsp;12:00:00</span>
+							<div class="pay_state">
+								<i class="paying_icon"></i>&nbsp;
+								<span class="paying_text">支付中</span>
+							</div>
+						</div>
+						<div class="pay_title_mesg">
+							<div class="pay_title">
+								<p>支付流水号：12343432453534</p>
+								<p>支付用户：122321342432 </p>							
+							</div>
+							<div class="pay_num">1000.00&nbsp;元</div>
+							<p>支付内容：取暖费 ，我勒个去这么多字，怎么能沉得下啊！还要改样式啊。不改放不下啊啊啊啊啊啊</p>
+						</div>				
+					</div>
+					<div class="pay_row">
+						<div class="pay_title_time">
+							<span class="pay_date"> 2017-01-03&nbsp;12:00:00</span>
+							<div class="pay_state">
+								<i class="payed_icon"></i>&nbsp;
+								<span class="payed_text">已完成</span>
+							</div>
+						</div>
+						<div class="pay_title_mesg">
+							<div class="pay_title">
+								<p>支付流水号：12343432453534</p>
+								<p>支付用户：122321342432 </p>								
+							</div>
+							<div class="pay_num">1000.00&nbsp;元</div>
+							<p>支付内容：取暖费 ，我勒个去这么多字，怎么能沉得下啊！还要改样式啊。不改放不下啊啊啊啊啊啊 </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery1.7以上 或者 Zepto 二选一，不要同时都引用 -->
+		<script src="js/zepto.min.js"></script>
+		<script src="js/dropload.min.js"></script>
+		<script>
+			var count = 0;
+			var pageSize = 10;
+			var pageIndex = 0;
+			var resultCount = 0;
+			$(function() {
+				// dropload
+				var dropload = $('.inner').dropload({
+					domUp: {
+						domClass: 'dropload-up',
+						domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+						domUpdate: '<div class="dropload-update">↑释放更新</div>',
+						domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+					},
+					domDown: {
+						domClass: 'dropload-down',
+						domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+						domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+						domNoData: '<div class="dropload-noData">暂无数据</div>'
+					},
+					loadUpFn: function(me) {
+						pageIndex = 1;
+						$.ajax({
+							type: 'GET',
+							url: 'url',
+							dataType: 'json',
+							success: function(data) {
+								count = data.count;
+								var result = '';
+								for(var i = 0; i < data.lists.length; i++) {
+									 result += '<div class="pay_row">' +
+										'<div class="pay_title_time">' + '<span class="pay_date">' + data.list[i].getTime + '</span>' +
+									    '<div class="pay_state">' + (data.list[i].payState == 0 ? '<i class="paying_icon"></i>&nbsp;<span class="paying_text">支付中</span>' : '<i class="payed_icon"></i>&nbsp;<span class="payed_text">已完成</span>') + '</div>' +
+                                        '</div>' +									
+										'<div class="pay_title_mesg">' + '<div class="pay_title">' +
+                                        '<p>' + '支付流水号：' + data.list[i].payID + '</p>' +
+                                        '<p>' + '支付用户：' + data.list[i].payID + '</p>' +
+										'<p>' + '支付内容：' + data.list[i].payNote + '</p>' +
+                                        '</div>' +
+                                        '<p class="pay_num">' + data.list[i].payMoney + '&nbsp;元' + '</p>' +
+                                        '</div>' +
+										'</div>';
+								}
+								// 每次数据加载完，必须重置
+								$('.lists').html(result);
+								if(pageIndex * pageSize < count) {
+									me.isLockDown = false;
+									//me.refresh();
+									me.resetload();
+								} else {
+									// 再往下已经没有数据                      
+									// 显示无数据                      
+									me.noData();
+									me.isLockDown = true;
+									me.resetload();
+								}
+							},
+							error: function(xhr, type) {
+								alert('加载出错，请重试!');
+								// 即使加载出错，也得重置
+								dropload.resetload();
+							}
+						});
+					},
+					loadDownFn: function(me) {
+						pageIndex++;
+						$.ajax({
+							type: 'GET',
+							url: 'url',
+							dataType: 'json',
+							success: function(data) {
+								count = data.count;
+								var result = '';
+								for(var i = 0; i < data.lists.length; i++) {
+									resultCount++;
+									 result += '<div class="pay_row">' +
+										'<div class="pay_title_time">' + '<span class="pay_date">' + data.list[i].getTime + '</span>' +
+									    '<div class="pay_state">' + (data.list[i].payState == 0 ? '<i class="paying_icon"></i>&nbsp;<span class="paying_text">支付中</span>' : '<i class="payed_icon"></i>&nbsp;<span class="payed_text">已完成</span>') + '</div>' +
+                                        '</div>' +									
+										'<div class="pay_title_mesg">' + '<div class="pay_title">' +
+                                        '<p>' + '支付流水号：' + data.list[i].payID + '</p>' +
+                                        '<p>' + '支付用户：' + data.list[i].payID + '</p>' +
+										'<p>' + '支付内容：' + data.list[i].payNote + '</p>' +
+                                        '</div>' +
+                                        '<p class="pay_num">' + data.list[i].payMoney + '&nbsp;元' + '</p>' +
+                                        '</div>' +
+										'</div>';
+
+								}
+								$('.lists').append(result);
+								if(pageIndex * pageSize < count) {
+									me.resetload();
+								} else {
+									// 再往下已经没有数据                      
+									// 显示无数据                      
+									me.noData();
+									me.isLockDown = true;
+									me.resetload();
+								}
+							},
+							error: function(xhr, type) {
+								alert('加载出错，请重试!');
+								// 即使加载出错，也得重置
+								//me.resetload();
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

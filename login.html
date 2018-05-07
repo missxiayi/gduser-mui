@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		 <style type="text/css">
+        html,
+        body {
+            background: url(images/icon_bg.png) center no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mui-content {
+            background-color: transparent;
+            height: 90%;
+        }
+
+        .change_pwd_box {
+            border-radius: 25px;
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .pwd_left {
+            width: 10%;
+        }
+
+        .mui-password {
+            width: 90%;
+        }
+
+        .mui-table-view:before,
+        .mui-table-view:after {
+            background: transparent;
+        }
+
+        .mui-input-group .mui-input-row:after {
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mui-content">
+
+        <div class="row">
+            <p class="login_img">
+                <img src="images/icon_title.png" />
+            </p>
+        </div>
+        <div class="login_title">用户室温监控系统</div>
+        <form id='login-form' class="mui-input-group">
+
+            <div class="mui-table-view change_pwd_box">
+                <div class="pwd_left">
+                    <img src="images/icon_user.png">
+                </div>
+                <div class="mui-input-row mui-password">
+                    <input type="text" id="login_user" class="mui-input-clear" style="border: none" placeholder="用户名">
+                </div>
+            </div>
+
+            <div style="width: 100%; height: 2rem;"></div>
+
+            <div class="mui-table-view change_pwd_box">
+                <div class="pwd_left">
+                    <img src="images/icon_password.png">
+                </div>
+                <div class="mui-input-row mui-password">
+                    <input type="password" id="login_pwd" class="mui-input-password" placeholder="密码">
+                </div>
+            </div>
+
+            <div class="checkbox">
+                <a href="Resettingpwd.aspx"><span class="login_forget_pwd">忘记密码？</span></a>
+            </div>
+        </form>
+        <div class="mui-content-padded">
+            <button id='login' class="login_btn mui-btn mui-btn-block mui-btn-primary ">登&nbsp;&nbsp;&nbsp;录</button>
+        </div>
+    </div>
+    <div class="login_footer">
+        <p>用户版&nbsp;|&nbsp;版本号：1.0.9</p>
+        <p>河北工大科雅能源科技股份有限公司&nbsp;版权所有</p>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/pako.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            /**实现功能，保存用户的登录信息到cookie中。当登录页面被打开时，就查询cookie**/
+            var userNameValue = getCookieValue("userName");
+            document.getElementById("login_user").value = userNameValue;
+            // $("#login_user").val() = userNameValue;
+            var userPassValue = getCookieValue("password");
+            document.getElementById("login_pwd").value = userPassValue;
+            // $("#login_pwd").val() = userPassValue;
+            var autologin = 0;
+            if (userNameValue != null && userNameValue !== "" && userPassValue != null && userPassValue !== "") {//先查看是否有本地数据（自动登录）
+
+                autologin = 1;
+                $.ajax({
+                    type: 'post',
+                    url: 'http://10086.gdkeya.com:12249/MobileService.ashx/',
+                    dataType: 'text',
+                    data: { //向服务器（接口）传递的参数
+                        GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+                        methodName: "Personal_Login",
+                        deviceID: "",
+                        userName: userNameValue,
+                        password: userPassValue,
+                        autoLogin: autologin,
+                    },
+                    success: function (data,status, xhr) {
+                        var data = unGzip(data, status, xhr);
+                        if (data.errorNum == 0) {
+                            //addCookie("userName", users_id, 7, "/");//将用户登录信息保存在cookie里
+                            // addCookie("password", pwds_id, 7, "/");
+                            window.location.href = 'index.aspx?json=' + JSON.stringify(data);
+                            return true;
+
+                        } else { //如果信息错误，作进一步判断
+                            mui.alert(data.errorMsg);
+                            $("#login_user").val("");
+                            $("#login_pwd").val("");
+                            deleteCookie("userName", "/");
+                            deleteCookie("password", "/");
+                            return false;
+                        }
+
+                    },
+
+                });
+            } else {
+                $(".login_btn").click(function () {
+                    var users_id = $("#login_user").val(); //获取页面中的登录名和密码
+                    var pwds_id = $("#login_pwd").val();
+                    if (users_id == "" || pwds_id == "") { //判空
+                        mui.alert("用户名密码不能为空！");
+                        return false;
+                    } else {
+                        $.ajax({
+                            type: 'post',
+                            url: 'http://10086.gdkeya.com:12249/MobileService.ashx/',
+                            dataType: 'text',
+                            data: { //向服务器（接口）传递的参数
+                                GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+                                methodName: "Personal_Login",
+                                deviceID: "",
+                                userName: users_id,
+                                password: pwds_id,
+                                autoLogin: autologin,
+                            },
+                            success: function (data, status, xhr) {
+                                var data = unGzip(data, status, xhr);
+                                if (data.errorNum == 0) {
+                                        addCookie("userName", users_id, 7, "/");//将用户登录信息保存在cookie里
+                                        addCookie("password", pwds_id, 7, "/");
+                                        window.location.href = 'index.html?json=' + JSON.stringify(data);
+                                        return true;                                    
+
+                                } else { //如果信息错误，作进一步判断
+                                    mui.alert(data.errorMsg);
+                                    $("#login_user").val("");
+                                    $("#login_pwd").val("");
+                                    return false;
+                                }
+
+                            },
+
+                        });
+                    }
+                })
+            };
+        })
+    </script>
+	</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="javascript:history.go(-1);location.reload()"><img src="images/icon_return.png" class="setup_return" /></a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" data-title-type="native" href="Changepwd.html">
+						修改密码
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" data-title-type="native" href="ServiceApply.html">
+						客服申请
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" data-title-type="native" href="Repair_Detail.html">
+						客服记录
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" data-title-type="native" href="notice.html">
+						公告消息
+					</a>
+				</li>
+			</ul>
+
+			<div class="mui-content-padded">
+				<button id='login' class="login_btn mui-btn mui-btn-block mui-btn-primary ">退出登录</button>
+			</div>
+
+		</div>
+		<div class="login_footer">
+			<p>用户版&nbsp;|&nbsp;版本号：1.0.9</p>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+ <script type="text/javascript">
+ 	
+ 	//退出确定框。退出后清楚cookie
+        function closeApp() {
+            var btn = ["确定", "取消"];
+            mui.confirm('确认退出登录？', '提示', btn, function (e) {
+                if (e.index == 0) {
+                    window.location.href = 'Login.aspx';
+                    deleteCookie("userName", "/");
+                    deleteCookie("password", "/");
+                }
+            });
+        }
+
+        var userNameValue = getCookieValue("userName");
+        var pwdValue = getCookieValue("password");
+        
+        //点击返回上一页按钮，为防止返回修改密码等数据页面，重复提交，所以获取首页数据，直接跳转到首页
+        function goback_click() {
+            $.ajax({
+                type: 'post',
+                url: '/MobileService.ashx/',
+                dataType: 'text',
+                data: { //向服务器（接口）传递的参数
+                    GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+                    methodName: "Personal_Login",
+                    deviceID: "",
+                    userName: userNameValue,
+                    password: pwdValue,
+                },
+                success: function (data, status, xhr) {
+                    var data = unGzip(data, status, xhr);
+                    if (data.errorNum == 0) {
+                        window.location.href = 'index.aspx?json=' + JSON.stringify(data);
+                        return true;
+
+                    } else { //如果信息错误，作进一步判断
+                        mui.alert(data.errorMsg);
+                        return false;
+                    }
+
+                },
+
+            });
+        }
+        function Repair_Add_click() {
+            window.location.href = "Repair_Add.aspx?userName=" + userNameValue + "&GDKYKEY=" + "5AlqeFaY5t4l8a8KocpydafEfeEG4%2B6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq";
+        }
+        function Repair_His_click() {
+            window.location.href = "Repair_His.aspx?userName=" + userNameValue + "&GDKYKEY=" + "5AlqeFaY5t4l8a8KocpydafEfeEG4%2B6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq";
+        }
+        function Notice_click() {
+            window.location.href = "Notice.aspx?userName=" + userNameValue + "&GDKYKEY=" + "5AlqeFaY5t4l8a8KocpydafEfeEG4%2B6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq";
+        }
+    </script>
+</html>

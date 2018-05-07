@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			body,
+			.mui-content {
+				background: #FFFFFF;
+			}
+			
+			.mui-plus .plus {
+				display: inline;
+			}
+			
+			.plus {
+				display: none;
+            } 
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			
+			.mui-popover {
+				width: 12rem;
+				height: 20rem;
+				text-align: center;
+				font-size: 1.4rem;
+				line-height: 1rem;
+			}
+			
+			.mui-table-view-cell:after {
+				background: #4486C9;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="container_box">
+				<div class="banner_row">
+
+					<div class="banner_bg">
+						<div class="banner_title_bg">
+							<p class="banner_title">
+								<a href="#middlePopover" class="mui-btn banner_title_text" id="room_id"></a>
+								<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover" style="color: transparent;">
+									<img src="images/icon_index_more.png" class="banner_img_select" /></a>
+							</p>
+						</div>
+						<p class="banner_tmp">
+							<span id="room_temp"></span>
+							<label class="banner_unit">℃</label>
+						</p>
+						<p class="banner_text">当前室温</p>
+						<p class="banner_text" id="get_time"></p>
+					</div>
+				</div>
+				<div class="index_line_row">
+					<div class="index_line_col">
+						<p class="index_line_text">供暖状态</p>
+						<p class="index_line_num" id="is_pay"></p>
+					</div>
+					<div class="index_line_col">
+						<p class="index_line_text">供/回水温度(℃)</p>
+						<p class="index_line_num" id="sup_retu_temps"></p>
+					</div>
+					<div class="line_col_last">
+						<p class="index_line_text">设定温度(℃)</p>
+						<p class="index_line_num">
+							<span id="set_temp"></span>&nbsp;&nbsp;
+							<img src="images/icon_set_temp.png" class="index_line_img" id="line_img" />
+						</p>
+					</div>
+				</div>
+				<div class="row list_row">
+					<div class="list_row1">
+						<p class="list_text">季初读数</p>
+						<p class="list_num" id="start_heat"></p>
+					</div>
+					<div class="list_row1">
+						<p class="list_text">当前读数</p>
+						<p class="list_num" id="acc_heat"></p>
+					</div>
+					<div class="list_row1">
+						<p class="list_text">下次关阀</p>
+						<p class="list_num" id="stop_heat"></p>
+					</div>
+					<div class="list_row1">
+						<p class="list_text">购买总热量</p>
+						<p class="list_num" id="yearbuy_heat"></p>
+					</div>
+					<div class="list_row1">
+						<p class="list_text">已用热量</p>
+						<p class="list_num" id="yearused_heat"></p>
+					</div>
+					<div class="list_row1">
+						<p class="list_text">剩余热量</p>
+						<p class="list_num" id="yeareamin_heat"></p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 房间下拉框 -->
+		<div id="middlePopover" class="mui-popover" style="width: 20rem; height: 8rem; overflow: auto">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="room_list">
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<!-- //房间下拉框 -->
+
+		<!--右上角弹出菜单-->
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a class="hot_click">耗热记录</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="Repair_His.html">历史记录</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="SetTemp_His.html">设温记录</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="Pay_His.html">缴费记录</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="Setup.html">设置</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 设定温度弹出框 -->
+		<div class="tem_box_bg"></div>
+		<div class="tem_box">
+			<div class="index_header_box">
+				<span class="index_title_box">温度设定</span>
+			</div>
+			<div class="index_row">
+				<div class="index_btn">
+					<input class="index_btn_num min" name="" type="button" value="-" />
+				</div>
+				<div class="index_border">
+					<input class="index_num" value="20.0" />
+					<label class="index_unit">℃</label>
+				</div>
+				<div class="index_btn">
+					<input class="index_btn_num add" name="" type="button" value="+" />
+				</div>
+			</div>
+			<div class="index_footer">
+				<button type="button" class="index_btn_confirm">确定</button>
+				<button type="button" class="index_btn_cancel" onclick="box_close();">取消</button>
+			</div>
+		</div>
+
+		<!-- //设定温度弹出框 -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/pako.js"></script>
+
+		<script type="text/javascript">
+			var liIndex = 0;
+
+			function GetRequest() { //获取URL中的参数
+				var url = window.location.search; //获取URL中“？”之后的参数
+				var theRequest = new Object();
+				if(url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+						/*通过搜索 在网上找到的是使用heRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+						但当参数中有中文的时候， 就会出现乱码的问题。 通过查询资料 原来是浏览器默认使用的是 encodeURI 对汉字进行的编码 所以在
+						解码的时候就需要使用decodeURI 而不是 unescape 上面的代码稍微修改下后 就能解决中文乱码的问题了*/
+					}
+				}
+				return theRequest;
+			}
+
+				$(function() { //获取后台传回的参数并展示在页面上
+					var Request = new Object();
+					Request = GetRequest();
+					var str = Request["json"];
+					jsons = str + location.hash; //总的json
+					var obj = eval("(" + jsons + ")");
+					var input_txt = eval(obj.list);
+					var room_list = "";
+					$("#room_id").text(input_txt[liIndex].communityName + input_txt[liIndex].buildName + input_txt[liIndex].unitName + input_txt[liIndex].houseNum);
+					for(var i = 0; i < input_txt.length; i++) {
+						room_list += '<li class="mui-table-view-cell" id="room_li_click">' + '<input style="display:none" value="' + i + '"></input>' + input_txt[i].communityName + input_txt[i].buildName + input_txt[i].unitName + input_txt[i].houseNum +
+							'</li>';
+					}
+					$("#room_list").append(room_list);
+
+					$.ajax({
+						type: 'post',
+						url: '../MobileService.ashx/',
+						dataType: 'text',
+						data: { //向服务器（接口）传递的参数
+							GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+							methodName: "Personal_GetRoomData",
+							roomID: input_txt[liIndex].roomID,
+						},
+						success: function(data, status, xhr) {
+							var data = unGzip(data, status, xhr);
+							if(data.errorNum == 0) {
+								addCookie("roomID", input_txt[liIndex].roomID, 7, "/"); //将用户登录信息保存在cookie里
+								if(data.model.roomTemp == 10 && data.model.setTemp == 30) {
+									$("#room_temp").text("--"); //室温
+									$("#set_temp").text("--"); //设定室温
+								} else {
+									$("#room_temp").text(toDecimal(data.model.roomTemp)); //室温
+									$("#set_temp").text(toDecimal(data.model.setTemp)); //设定室温
+								}
+								$("#is_pay").text(data.model.isPay == 0 ? "锁闭" : "正常"); //供暖状态
+								$("#is_msettemp").text(data.model.isMSetTemp); //是否强制室温
+								$("#temp_devstate").text(data.model.tempDevState); //温控器状态
+								$("#m_settemp").text(data.model.mSetTemp); //强制室温
+								$("#sup_retu_temps").text(data.model.supTemp + "/" + data.model.retuTemp); //供水温度回水温度                        
+								$("#get_time").text(data.model.getTime); //采集日期
+								$("#start_heat").text(toDecimal2(data.model.startHeat) + "kW.h"); //热量表--年度初值
+								$("#acc_heat").text(toDecimal2(data.model.accHeat) + "kW.h"); //热量表--当前读数
+								$("#stop_heat").text(toDecimal2(data.model.stopHeat) + "kW.h"); //热量表--下次关阀数
+								$("#yearbuy_heat").text(toDecimal2(data.model.yearBuyHeat) + "kW.h"); //购买总热量
+								$("#yearused_heat").text(toDecimal2(data.model.yearUsedHeat) + "kW.h"); //已用热量
+								$("#yeareamin_heat").text(toDecimal2(data.model.yearEaminHeat) + "kW.h"); //剩余热量
+								return true;
+							} else { //如果信息错误，作进一步判断
+								mui.alert(data.errorMsg);
+								return false;
+							}
+
+						},
+
+					});
+
+					//切换房间
+					$("#room_list li").click(function() {
+						liIndex = $(this).children("input").val();
+						$("#middlePopover").removeClass("mui-active");
+						$(".mui-backdrop").hide();
+						$("#room_id").text(input_txt[liIndex].communityName + input_txt[liIndex].buildName + input_txt[liIndex].unitName + input_txt[liIndex].houseNum);
+						$.ajax({
+							type: 'post',
+							url: '../MobileService.ashx/',
+							dataType: 'text',
+							data: { //向服务器（接口）传递的参数
+								GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+								methodName: "Personal_GetRoomData",
+								roomID: input_txt[liIndex].roomID,
+							},
+							success: function(data, status, xhr) {
+								var data = unGzip(data, status, xhr);
+								if(data.errorNum == 0) {
+									addCookie("roomID", input_txt[liIndex].roomID, 7, "/"); //将用户登录信息保存在cookie里
+									if(data.model.roomTemp == 10 && data.model.setTemp == 30) {
+										$("#room_temp").text("--"); //室温
+										$("#set_temp").text("--"); //设定室温
+									} else {
+										$("#room_temp").text(toDecimal(data.model.roomTemp)); //室温
+										$("#set_temp").text(toDecimal(data.model.setTemp)); //设定室温
+									}
+									$("#is_pay").text(data.model.isPay == 0 ? "锁闭" : "正常"); //供暖状态
+									$("#is_msettemp").text(data.model.isMSetTemp); //是否强制室温
+									$("#temp_devstate").text(data.model.tempDevState); //温控器状态
+									$("#m_settemp").text(data.model.mSetTemp); //强制室温
+									$("#sup_retu_temps").text(data.model.supTemp + "/" + data.model.retuTemp); //供水温度回水温度
+									$("#room_temp").text(toDecimal(data.model.roomTemp)); //室温
+									$("#set_temp").text(toDecimal(data.model.setTemp)); //设定室温
+									$("#get_time").text(data.model.getTime); //采集日期
+
+									$("#start_heat").text(toDecimal2(data.model.startHeat) + "kW.h"); //热量表--年度初值
+									$("#acc_heat").text(toDecimal2(data.model.accHeat) + "kW.h"); //热量表--当前读数
+									$("#stop_heat").text(toDecimal2(data.model.stopHeat) + "kW.h"); //热量表--下次关阀数
+									$("#yearbuy_heat").text(toDecimal2(data.model.yearBuyHeat) + "kW.h"); //购买总热量
+									$("#yearused_heat").text(toDecimal2(data.model.yearUsedHeat) + "kW.h"); //已用热量
+									$("#yeareamin_heat").text(toDecimal2(data.model.yearEaminHeat) + "kW.h"); //剩余热量
+									return true;
+								} else { //如果信息错误，作进一步判断
+									mui.alert(data.errorMsg);
+									return false;
+								}
+
+							},
+						});
+					})
+
+					//菜单切换
+					$(".hot_click").click(function() {
+						window.location.href = "RoomData_HotHis.html?roomID=" + input_txt[liIndex].roomID + "&GDKYKEY=" + "5AlqeFaY5t4l8a8KocpydafEfeEG4%2B6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq";
+					});
+
+					//设定温度弹出框显示
+					$("#line_img").click(function() {
+						var temp_old = $("#set_temp").text();
+						if(temp_old == "--") {
+
+						} else {
+							$(".tem_box").fadeIn(200);
+							$(".tem_box_bg").fadeIn(200);
+						}
+
+					});
+					//数字加减
+					$(".add").click(function() {
+						$(".index_num").val(toDecimal(Number($(".index_num").val()) + 1 / 2));
+					});
+					$(".min").click(function() {
+						$(".index_num").val(toDecimal(Number($(".index_num").val()) - 1 / 2));
+					});
+
+					//确定按钮
+					$(".index_btn_confirm").click(function() {
+						var temp_old = $("#set_temp").text();
+						var temp_new = $(".index_num").val();
+						$("#set_temp").text(temp_new); //设定室温
+						$.ajax({
+							type: 'post',
+							url: '../MobileService.ashx/',
+							dataType: 'text',
+							data: { //向服务器（接口）传递的参数
+								GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+								methodName: "Personal_SetRoomTemp",
+								roomID: input_txt[liIndex].roomID,
+								roomTemp: temp_old,
+								setTemp: temp_new,
+							},
+							success: function(data, status, xhr) {
+								var data = unGzip(data, status, xhr);
+								if(data.errorNum == 0) {
+									mui.toast("温度设定成功!");
+									return true;
+								} else { //如果信息错误，作进一步判断
+									mui.alert(data.errorMsg);
+									return false;
+								}
+							},
+						});
+						box_close();
+					});
+				})
+		</script>
+	</body>
+
+</html>

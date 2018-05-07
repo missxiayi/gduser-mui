@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<img src="images/icon_return.png" class="setup_return" />
+			<h1 class="mui-title">修改密码</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-table-view change_pwd_box">
+				<div class="pwd_left">
+					<img src="images/icon_pwd_lock.png">
+					<label>旧密码：</label>
+				</div>
+					<div class="mui-input-row mui-password">
+					<input type="password" class="mui-input-password">
+				</div>
+			</div>	
+			<div class="mui-table-view change_pwd_box">
+				<div class="pwd_left">
+					<img src="images/icon_pwd_lock.png">
+					<label>新密码：</label>
+				</div>
+					<div class="mui-input-row mui-password">
+					<input type="password" class="mui-input-password">
+				</div>
+			</div>	
+			<div class="mui-table-view change_pwd_box">
+				<div class="pwd_left">
+					<img src="images/icon_pwd_lock.png">
+					<label>确认密码：</label>
+				</div>
+					<div class="mui-input-row mui-password">
+					<input type="password" class="mui-input-password">
+				</div>
+			</div>	
+			<div class="mui-content-padded">
+				<button class="login_btn mui-btn mui-btn-block mui-btn-primary ">确定</button>
+			</div>
+
+		</div>
+
+		<script src="js/mui.min.js"></script>		
+	</body>
+	 <script type="text/javascript">
+	 	//点击按钮获取用户名，传回修改的密码数据
+            $(function () {                
+				$(".login_btn").click(function() {
+				    var old_pwd = $("#old_pwd").val(); //获取页面中的密码
+				    var new_pwd = $("#new_pwd").val();
+				    var new_pwd2 = $("#new_pwd2").val();
+				    if (new_pwd !== new_pwd2) { //判空
+						mui.alert("两次输入密码不一致！");
+						return false;
+				    } else {
+				        var userNameValue = getCookieValue("userName");
+				        var userPassValue = getCookieValue("password");
+				        $.ajax({
+				            type: 'post',
+				            url: '../MobileService.ashx/',
+				            dataType: 'text',
+				            data: { //向服务器（接口）传递的参数
+				                GDKYKEY: "5AlqeFaY5t4l8a8KocpydafEfeEG4+6YWSjTpifpAS/6bUr9BMl9AjAhh1NnSbZq",
+				                methodName: "Personal_ChangePassword",
+				                userName: userNameValue,
+				                password: userPassValue,
+				                newPassword: new_pwd,
+				            },
+				            success: function (data) {
+				                if (data.errorNum == 0) {
+				                    var btn = ["确定", "取消"];
+				                    mui.confirm('确认修改密码？', '提示', btn, function (e) {
+				                        if (e.index == 0) {
+				                            window.location.href = 'Login.aspx';
+				                            deleteCookie("password", "/");
+				                        }
+				                    });
+				                    
+				                    return true;
+				                } else { //如果信息错误，作进一步判断
+				                    mui.alert(data.errorMsg);
+				                    return false;
+				                }
+
+				            },
+
+				        });
+				    }
+				})
+
+			})
+		</script>	
+
+</html>

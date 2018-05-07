@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/megapix-image.js" ></script>
+		<script type="text/javascript" src="js/exif.js" ></script>
+		<script type="text/javascript">$(function() {
+	//下拉菜單
+	$(".help_select_list li").click(function() {
+		$('.help_input').val($(this).attr('title'));
+		$('.help_select_list').hide();
+		$("#chose_bank").parent('div').find('img').addClass('jt_xz');
+	});
+	$(".help_select_div").click(function() {
+		if($('.help_select_list').css("display") == 'none') {
+			$('.help_select_list').show();
+			$("#chose_bank").parent('div').find('img').removeClass('jt_xz');
+		} else {
+			$('.help_select_list').hide();
+			$("#chose_bank").parent('div').find('img').addClass('jt_xz');
+		}
+	});
+})</script>
+	</head>
+
+	<body>
+		<div class="help_container">
+			<div class="help_select_div">
+				<input placeholder="请选择房间" class="help_input" />
+				<div class="select_img">
+					<img class="jt_xz" src="images/select_icon.png" alt="" /></div>
+				<div id="chose_bank" class="select_img1"></div>
+			</div>
+			<div class="help_select_list" style="display: none;">
+				<ul>
+					<li title="志诚华府1号楼1单元0101房间">志诚华府1号楼1单元0101房间</li>
+					<li title="志诚华府1号楼1单元0102房间">志诚华府1号楼1单元0102房间</li>
+				</ul>
+			</div>
+			<textarea class="apply_text" placeholder="请输入问题..."></textarea>
+			<!--    照片添加    -->
+			<div class="z_photo" id="z_photo">
+				<div class="z_file" id="z_file">
+					<input type="file"  id="fileInput" capture="camera" onchange="imgChange('z_photo','z_file');"/>
+				</div>
+				
+			</div>
+			<!--遮罩层-->
+			<div class="z_mask">				
+				<div class="z_alert">
+					<p>提示</p>
+					<p>确定要删除这张图片吗？</p>
+					<p>
+						<span class="z_sure">确定</span>
+						<span class="z_cancel">取消</span>					
+					</p>
+				</div>
+			</div>
+			<div class="apply_btn_div">
+				<button class="apply_btn">确定</button>
+			</div>
+
+		</div>
+		<script type="text/javascript">//px转换为rem
+(function(doc, win) {
+	var docEl = doc.documentElement,
+		resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		recalc = function() {
+			var clientWidth = docEl.clientWidth;
+			if(!clientWidth) return;
+			if(clientWidth >= 640) {
+				docEl.style.fontSize = '100px';
+			} else {
+				docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+			}
+		};
+
+	if(!doc.addEventListener) return;
+	win.addEventListener(resizeEvt, recalc, false);
+	doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+
+function imgChange(obj1, obj2) {
+	//获取点击的文本框
+	var fileInput = document.getElementById("fileInput");
+	//存放图片的父级元素
+	var imgContainer = document.getElementsByClassName(obj1)[0];
+	//获取的图片文件
+	var fileList = fileInput.files;
+
+	//文本框的父级元素
+	var input = document.getElementsByClassName(obj2)[0];
+	var imgArr = []; 
+     var Orientation = 1; 
+    //var base64 = null;
+	//遍历获取到得图片文件
+	for(var i = 0; i < fileList.length; i++) {
+		var file = fileList[i];
+		var mpImg = new MegaPixImage(file);
+		var img = document.createElement("img");
+		mpImg.render(img, { maxWidth: 1024, maxHeight: 1024, quality: 0.8 });
+		        
+
+		var imgUrl = window.URL.createObjectURL(fileList[i]);
+		imgArr.push(imgUrl);
+		img.setAttribute("src", imgArr[i]);
+		var imgAdd = document.createElement("div");
+		imgAdd.setAttribute("class", "z_addImg");
+		imgAdd.appendChild(img);
+		imgContainer.insertBefore(imgAdd,imgContainer.childNodes[0]);
+		        		
+	};
+	imgRemove();
+};
+
+
+function imgRemove() {
+	var imgList = document.getElementsByClassName("z_addImg");
+	var mask = document.getElementsByClassName("z_mask")[0];
+	var cancel = document.getElementsByClassName("z_cancel")[0];
+	var sure = document.getElementsByClassName("z_sure")[0];
+	for(var j = 0; j < imgList.length; j++) {
+		imgList[j].index = j;		
+		imgList[j].onclick = function() {
+			var t = this;		
+			mask.style.display="block";
+			cancel.onclick = function() {
+				mask.style.display="none";
+			}
+			sure.onclick = function() {
+				mask.style.display="block";
+				t.remove();
+			}
+			
+		}
+	};
+};
+		</script>
+	</body>
+
+</html>
